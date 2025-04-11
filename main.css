@@ -1,0 +1,418 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Manrope", sans-serif;
+}
+
+.container {
+  width: 1200px;
+  margin: 5px auto;
+  max-width: 100%;
+  min-height: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+}
+
+.container .sidebar-left {
+  width: 30%;
+  background: #1d4e92;
+  color: #fff;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: width 0.5s ease, padding 0.5s ease, opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.sidebar-left.mobile {
+  position: absolute;
+  min-width: 305px;
+  height: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  opacity: 1 !important;
+}
+
+.container .wp-site .main-header .name_system h1 span.mobile svg {
+  display: none;
+}
+
+.container .sidebar-left.compact {
+  width: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none; /* tránh bị click */
+}
+
+.container .wp-site {
+  width: 70%;
+  background: #f7f8fc;
+  border-bottom-right-radius: 10px;
+}
+
+.container .wp-site.widest {
+  width: 100%;
+}
+.container .wp-site.widest .main-header {
+  border-top-left-radius: 10px;
+}
+
+.container .wp-site .main-header {
+  background: #1d4e92;
+  color: #fff;
+  border-top-right-radius: 10px;
+}
+
+.container .wp-site .main-header svg {
+  fill: #fff;
+}
+
+.container .sidebar-left ul.menu_system li {
+  list-style: none;
+}
+.container .sidebar-left ul.menu_system li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.container .sidebar-left ul.menu_system li svg {
+  fill: #fff;
+}
+
+.container .sidebar-left .name_system h1 {
+  font-size: 1.2rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.container .sidebar-left .name_system h1 svg {
+  fill: #fff;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.container .sidebar-left .name_system h1 span.mobile svg {
+    display: none;
+}
+
+.container .sidebar-left .name_system {
+  padding: 20px 25px;
+  border-right: 1px solid #000;
+}
+
+.container .wp-site .main-header .name_system h1 {
+  font-size: 1.2rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.container .wp-site .main-header .name_system h1 span.main svg {
+  cursor: pointer;
+  margin-right: 10px;
+  display: none;
+}
+
+.container .wp-site .main-header .name_system h1 span.main svg.active {
+  display: block;
+}
+
+.container .wp-site .main-content {
+  padding: 20px 25px;
+}
+
+.container .wp-site .main-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: center;
+  padding: 20px 25px;
+}
+.container .sidebar-left ul.menu_system {
+  padding: 0 25px;
+  margin-top: 15px;
+}
+
+.container .sidebar-left ul.menu_system li a {
+  display: flex;
+  align-items: center;
+  padding: 12px 10px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.container .sidebar-left ul.menu_system li a svg {
+  margin-right: 10px;
+}
+
+.container .sidebar-left ul.menu_system li:hover a {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.container .wp-site .main-header .action_user {
+  position: relative;
+}
+
+.container .wp-site .main-header .action_user svg.user {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+/* Ẩn mặc định */
+.list_action {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  top: 37px;
+  left: -122px;
+  z-index: 100;
+  background: #fff;
+  color: #000;
+  min-width: 150px;
+  border-radius: 10px;
+  padding: 15px 10px;
+}
+
+/* Khi hover vào icon user thì hiện menu */
+.action_user:hover .list_action {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* Trượt lên */
+}
+
+.container .wp-site .main-header .action_user .list_action svg {
+  width: 20px;
+  height: 20px;
+}
+
+.container .wp-site .main-header .action_user .list_action .item_action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+
+.container .wp-site .main-header .action_user .list_action .item_action a {
+  text-decoration: none;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .wp-site .main-header .action_user .list_action .item_action svg {
+  margin-right: 10px;
+  fill: #000;
+}
+
+.container .wp-site .main-content .name_page {
+  margin-bottom: 15px;
+}
+
+.container .wp-site .main-content table {
+  width: 100%;
+}
+
+.container .wp-site .main-content table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container .wp-site .main-content table thead {
+  background-color: #f5f7fa;
+}
+
+.container .wp-site .main-content table th,
+.container .wp-site .main-content table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.container .wp-site .main-content table th {
+  color: #333;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.container .wp-site .main-content table td {
+  color: #555;
+  font-size: 14px;
+}
+
+/* Hover row effect */
+.container .wp-site .main-content table tbody tr:hover {
+  background-color: #f0f4f8;
+  transition: background 0.2s ease-in-out;
+}
+
+/* Zebra striping */
+.container .wp-site .main-content table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.container .wp-site .main-content button.btn-delete {
+  background-color: #e74c3c;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 10px;
+}
+
+.container .wp-site .main-content button svg {
+  fill: #fff;
+}
+
+.container .wp-site .main-content button {
+  cursor: pointer;
+}
+
+.container .wp-site .main-content button.btn-edit {
+  background-color: #3498db;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 10px;
+}
+
+.alert_modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999999999999999999;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Calibri;
+  font-weight: 900;
+}
+
+.alert_container {
+  width: 90%;
+  background-color: white;
+  border-radius: 10px;
+  animation: 0.5s 1 alert_container_animation;
+  -webkit-animation: 35s 1 alert_container_animation;
+}
+
+@media (min-width: 600px) {
+  .alert_container {
+    width: 350px;
+  }
+}
+
+@keyframes alert_container_animation {
+  0% {
+    transform: scale(0.5);
+  }
+
+  1% {
+    transform: scale(1.1);
+  }
+
+  2% {
+    transform: scale(1);
+  }
+}
+
+@-webkit-keyframes alert_container_animation {
+  0% {
+    transform: scale(0.5);
+  }
+
+  1% {
+    transform: scale(1.1);
+  }
+
+  2% {
+    transform: scale(1);
+  }
+}
+
+.alert_heading {
+  padding: 20px;
+  border-radius: 10px 10px 0px 0px;
+  text-align: center;
+}
+
+.alert_details {
+  padding: 15px;
+  text-align: center;
+}
+
+.alert_details h2 {
+  font-size: 20px;
+}
+
+.alert_details p {
+  font-size: 14px;
+  color: #525252;
+  line-height: 1.5em;
+  margin-top: 5px;
+}
+
+.alert_footer {
+  background-color: #e3e3e3;
+  padding: 10px;
+  border-radius: 0px 0px 10px 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.alert_footer span {
+  color: #979797;
+  cursor: pointer;
+}
+
+.alert_footer span:hover {
+  color: #353535;
+}
+
+@media screen and (max-width: 1024px) {
+  .container .sidebar-left {
+    width: 0;
+    padding: 0;
+    opacity: 0;
+  }
+
+  .container .sidebar-left .name_system h1 span.main svg {
+    display: none;
+}
+  .container .sidebar-left .name_system h1 span.mobile svg {
+    display: block;
+}
+
+  .container .wp-site {
+    width: 100%;
+  }
+
+  .container .wp-site .main-header .name_system h1 span {
+    display: block;
+  }
+  .container .wp-site .main-header .name_system h1 span svg {
+    display: block;
+  }
+
+  .container .wp-site .main-header .name_system h1 span.mobile svg {
+    display: block;
+  }
+}
