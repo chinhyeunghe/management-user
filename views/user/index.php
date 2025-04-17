@@ -1,6 +1,6 @@
 <?php
 
-require_once './template/sidebar.php';
+require_once '../public/template/sidebar.php';
 // Nội dung chính của trang
 ?>
 
@@ -39,4 +39,4 @@ require_once './template/sidebar.php';
 
 <?php
 // Kết thúc nội dung chính
-require_once './template/footer.php';
+require_once '../public/template/footer.php';

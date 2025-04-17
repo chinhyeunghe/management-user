@@ -2,7 +2,12 @@
 
 // load routes
 
+
 require_once __DIR__ .'/../routes/web.php';
+
+// load helper
+
+require_once __DIR__.'/../helpers/function.php';
 
 // Lấy URI hiện tại
 $uri = parse_url(url: $_SERVER['REQUEST_URI'], component: PHP_URL_PATH);
@@ -15,6 +20,7 @@ if(!isset($routes[$requestUri])) {
 }
 
 $route = $routes[$requestUri];
+
 
 // load controller
 $controllerName = $route['controler'];
