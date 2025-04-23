@@ -11,4 +11,7 @@ class UserController {
 
         return view('user/create');
     }
+
+    // handle add new user
+
 }
