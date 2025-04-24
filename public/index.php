@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 // load routes
 
 
@@ -23,7 +25,7 @@ $route = $routes[$requestUri];
 
 
 // load controller
-$controllerName = $route['controler'];
+$controllerName = $route['controller'];
 // load tên hàm
 $method = $route['method'];
 // load file controller

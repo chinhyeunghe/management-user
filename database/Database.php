@@ -1,5 +1,7 @@
 <?php
 
+$config = require_once "../config/config.php";
+
 class Database {
 
     private static $instance = null;
@@ -30,5 +32,28 @@ class Database {
         return $this->pdo;
     }
 
+    // Insert
+
+    public function create($table, $data) {
+
+        $column = implode(", ", array_keys($data)); // id, name, ...
+        $placeholders = ":".implode(", :", array_keys($data));
+
+        $sql = "INSERT INTO {$table} ({$column}) VALUES ({$placeholders})";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        foreach ($data as $key => $value) {
+            $stmt->bindValue(":{$key}", $value);    
+        }
+
+       return $stmt->execute();
+    }
 
 }
+
+// khởi tạo luôn
+
+$initDB = new Database($config);
+
+return $initDB;

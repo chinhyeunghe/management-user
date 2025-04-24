@@ -2,7 +2,7 @@
 
 return [
     'host' => 'localhost',
-    'dbname' => 'db_test',
+    'dbname' => 'user_manager',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8mb4'

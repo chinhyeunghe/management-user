@@ -7,6 +7,16 @@ require_once '../public/template/sidebar.php';
 <div class="name_page">
     <h2>User</h2>
 </div>
+<div style="margin-bottom: 20px; text-align: right; padding-right: 20px; padding-top: 20px; padding-bottom: 20px; color: #2ecc71;">
+    <?php
+    if (isset($_SESSION['success'])) {
+        echo "<div class='success'>";
+        echo $_SESSION['success'];
+        echo "</div>";
+        unset($_SESSION['success']);
+    }
+    ?>
+</div>
 <table>
     <thead>
         <tr>

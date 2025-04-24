@@ -1,8 +1,9 @@
 <?php
 
 $routes = [
-    'devC/Php/user-manager' => ['controler' => 'UserController', 'method' => 'index'],
-    'devC/Php/user-manager/create' => ['controler' => 'UserController', 'method' => 'createUser']
+    'devC/Php/user-manager' => ['controller' => 'UserController', 'method' => 'index'],
+    'devC/Php/user-manager/create' => ['controller' => 'UserController', 'method' => 'createUser'],
+    'devC/Php/user-manager/add' => ['controller' => 'Usercontroller', 'method' => 'addUser']
 ];
 
 return $routes;
