@@ -280,6 +280,7 @@
 
 .container .wp-site .main-content button {
   cursor: pointer;
+  margin-top: 30px;
 }
 
 .container .wp-site .main-content button.btn-edit {
@@ -443,8 +444,11 @@
   width: 100%;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #ccc;
   margin-bottom: 5px;
+}
+
+.form-main form input{
+  border: 1px solid #ccc;
 }
 
 .form-main form button {

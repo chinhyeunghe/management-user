@@ -54,7 +54,6 @@ require_once '../public/template/sidebar.php';
         <span class="error-input">
                 
                 <?php
-                echo "<hr>";
                 if (isset($errors['insert'])) {
                     echo $errors['insert'];
                 }

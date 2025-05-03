@@ -11,9 +11,17 @@ class UserController {
 
     use Validator;
 
+    private $userModel;
+
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+    }
+
     public function index() {
         
-        return view('user/index');
+        $listUsers =  $this->userModel->getAllUsers();
+        return view('user/index', ['listUsers' => $listUsers]);
     }
 
     public function createUser() {
@@ -74,13 +82,17 @@ class UserController {
 
                 // gộp dữ liệu
 
-                $uploadDir = "./assets/avatars/";
-                $uploadFile = $uploadDir.time()."_".basename($_FILES['avatar']['name']);
-                
-                if(!move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadFile)) {
-                    $errors['avatar'] = "Lỗi tải lên ảnh! Kiểm tra lại";
-                    return view('user/create', ['errors' => $errors]);
+                if(isset($_FILES['avatar']) && !$_FILES['avatar']['error']) {
+                    $uploadDir = "./assets/avatars/";
+                    $uploadFile = $uploadDir.time()."_".basename($_FILES['avatar']['name']);
+                    
+                    if(!move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadFile)) {
+                        $errors['avatar'] = "Lỗi tải lên ảnh! Kiểm tra lại";
+                        return view('user/create', ['errors' => $errors]);
+                    }
                 }
+
+               
 
                 // Lưu trữ cơ sở dữ liệu
 
@@ -88,13 +100,12 @@ class UserController {
                     'name' => $name,
                     'email' => $email,
                     'password' => password_hash($password, PASSWORD_DEFAULT),
-                    'anh_dai_dien' => $uploadFile,
+                    'anh_dai_dien' => $uploadFile ?? null
                 ];
                 
 
-                $userModel = new UserModel();
 
-                if($userModel->addUser($data)) {
+                if( $this->userModel->addUser($data)) {
                     $_SESSION['success'] = "Thêm mới người dùng thành công!";
                     header("Location: /devC/Php/user-manager/");
                 }else {

@@ -50,6 +50,16 @@ class Database {
        return $stmt->execute();
     }
 
+    // Query DB
+
+    public function myQuery($sql, $params = [] ){
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 }
 
 // khởi tạo luôn
