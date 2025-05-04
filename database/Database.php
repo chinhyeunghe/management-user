@@ -50,15 +50,53 @@ class Database {
        return $stmt->execute();
     }
 
+    // Update
+
+    public function update($table, $data, $where) {
+
+        $set = "";
+
+        foreach($data as $key => $value) {
+
+            $set .= "{$key} = :{$key}, ";
+        }
+
+        $sql = "UPDATE {$table} SET  ".rtrim($set, ", ")." WHERE {$where}";
+        $stmt = $this->pdo->prepare($sql);
+
+        foreach($data as $key => $value) {
+            $stmt->bindValue(":{$key}", $value);
+        }
+        return $stmt->execute();
+
+    }
+    // delete
+
+    public function delete($table, $where) {
+
+        $sql = "DELETE FROM {$table} WHERE {$where}";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute();
+    }
+
+
+
     // Query DB
 
-    public function myQuery($sql, $params = [] ){
+    public function myQuery($sql, $params = [] , $fetchOne = false) {
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
+        if ($fetchOne) {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        // fetchAll
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+
 
 }
 

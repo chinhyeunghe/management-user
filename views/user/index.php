@@ -15,6 +15,13 @@ require_once '../public/template/sidebar.php';
         echo "</div>";
         unset($_SESSION['success']);
     }
+
+    if (isset($_SESSION['error'])) {
+        echo "<div class='error'>";
+        echo $_SESSION['error'];
+        echo "</div>";
+        unset($_SESSION['error']);
+    }
     ?>
 </div>
 <table>
@@ -43,7 +50,7 @@ require_once '../public/template/sidebar.php';
                     <td><?=$user['email'] ?></td>
                     <td>...</td>
                     <td>
-                        <button class="btn-delete" onclick="show_confirm_alert()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000">
+                        <button class="btn-delete" onclick="show_info_alert(<?=$user['id']?>)"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000">
                                 <path d="M200-440v-80h560v80H200Z" />
                             </svg></button>
                         <a href="/devC/Php/user-manager/update/<?=$user['id'] ?>" class="btn-edit"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000">
@@ -63,3 +70,4 @@ require_once '../public/template/sidebar.php';
 <?php
 // Kết thúc nội dung chính
 require_once '../public/template/footer.php';
+?>

@@ -2,7 +2,8 @@ const New = {
   status: "success",
   title: "",
   content: "",
-  alert: function ({ status, title, content, confirmbtn = true }) {
+  params: {},
+  alert: function ({ status, title, content, confirmbtn = true, params }) {
     var title;
     var status;
     var content;
@@ -73,11 +74,11 @@ const New = {
                   `;
       confirmbtn == true
         ? (alert_footer.innerHTML = `
-               <span class="accept" title="I approve">
-                I approve
+               <span class="accept" title="Đồng ý">
+                Đồng ý
               </span>
-              <span class="close" title="I refuse">
-                I refuse
+              <span class="close" title="Hủy">
+                Hủy
               </span>
                `)
         : (alert_footer.innerHTML = `
@@ -94,14 +95,31 @@ const New = {
       .addEventListener("click", function () {
         alert.remove();
         modal.remove();
+        location.reload();
       });
+
     document
       .querySelector(".alert_footer .accept")
       .addEventListener("click", function () {
         alert.remove();
         modal.remove();
+
+        // Xử lý khi nhấn nút đồng ý ở đây
+
+        try {
+          const response = fetch("/devC/Php/user-manager/delete/" + params.id, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: params.id }),
+          });
+        } catch (error) {
+          console.error("Error:", error);
+        }
       });
-    document.querySelector(".alert_footer .accept").onclick = accept;
+    document.querySelector(".alert_footer .accept").onclick =
+      show_success_alert;
   },
 };
 function show_confirm_alert() {
@@ -113,12 +131,13 @@ function show_confirm_alert() {
     confirmbtn: false,
   });
 }
-function show_info_alert() {
+function show_info_alert(id) {
   New.alert({
     status: "info",
-    title: "You confirm to delete this account",
-    content: "Do you really want to delete this account forever?",
+    title: "Bạn có chắc chắn muốn xóa tài khoản này không?",
+    content: "Tài khoản này sẽ không thể khôi phục lại được",
     confirmbtn: true,
+    params: { id: id },
   });
 }
 function accept() {
@@ -138,8 +157,8 @@ function show_Err_alert() {
 function show_success_alert() {
   New.alert({
     status: "success",
-    title: "Update successful",
-    content: "Your account information has been successfully updated",
+    title: "Xóa tài khoản thành công",
+    content: "",
   });
 }
 
@@ -171,19 +190,22 @@ if (openMenu) {
   });
 }
 
-const spanOpen = document.querySelector('.container .wp-site .main-header .name_system h1 span.mobile svg');
+const spanOpen = document.querySelector(
+  ".container .wp-site .main-header .name_system h1 span.mobile svg"
+);
 
-
-if(spanOpen) {
-  spanOpen.addEventListener('click', () => {
-    sideBarLeft.classList.toggle('mobile');
-  })
+if (spanOpen) {
+  spanOpen.addEventListener("click", () => {
+    sideBarLeft.classList.toggle("mobile");
+  });
 }
 
-const barMobile = document.querySelector('.container .sidebar-left .name_system h1 span.mobile svg');
+const barMobile = document.querySelector(
+  ".container .sidebar-left .name_system h1 span.mobile svg"
+);
 
-if(barMobile) {
-  barMobile.addEventListener('click', () => {
-    sideBarLeft.classList.toggle('mobile');
-  })
+if (barMobile) {
+  barMobile.addEventListener("click", () => {
+    sideBarLeft.classList.toggle("mobile");
+  });
 }

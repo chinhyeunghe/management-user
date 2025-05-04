@@ -60,6 +60,12 @@ class UserController
                 if (!self::email($email)) {
                     $errors['email'] = 'Email vừa nhập không hợp lệ';
                 }
+
+                // check email có tồn tại hay không
+
+                if ($this->userModel->getUserBy("email = '$email'")) {
+                    $errors['email'] = 'Email đã tồn tại! Vui lòng nhập email khác';
+                }
             } else {
                 $errors['email'] = 'Vui lòng nhập địa chỉ email';
             }
@@ -125,7 +131,20 @@ class UserController
     public function updateUser($id)
     {
 
+        // lấy thông tin người dùng theo id
+        $user = $this->userModel->getUserBy("id = $id");
+        if (empty($user)) {
+            $_SESSION['error'] = "Người dùng không tồn tại!";
+            header("Location: /devC/Php/user-manager/");
+            exit;
+        }
+        return view('user/update', ['id' => $id, 'user' => $user]);
+    }
 
+    public function editUser($id)
+    {
+
+        $user = $this->userModel->getUserBy("id = $id");
         if (!empty($_POST)) {
 
             $errors = [];
@@ -149,6 +168,11 @@ class UserController
                 if (!self::email($email)) {
                     $errors['email'] = 'Email vừa nhập không hợp lệ';
                 }
+
+                // check email có tồn tại hay không
+                if ($this->userModel->getUserBy("email = '$email' AND id != $id")) {
+                    $errors['email'] = 'Email đã tồn tại! Vui lòng nhập email khác';
+                }
             } else {
                 $errors['email'] = 'Vui lòng nhập địa chỉ email';
             }
@@ -162,9 +186,7 @@ class UserController
 
             // checkPass
 
-            if (empty($password)) {
-                $errors['password'] = 'Vui lòng nhập mật khẩu tài khoản';
-            } else {
+            if (!empty($password)) {
                 if (is_string(self::password($password))) {
                     $errors['password'] = self::password($password);
                 }
@@ -184,30 +206,47 @@ class UserController
                         return view('user/create', ['errors' => $errors]);
                     }
                 }
-
-
-
                 // Lưu trữ cơ sở dữ liệu
 
                 $data = [
                     'name' => $name,
                     'email' => $email,
-                    'password' => password_hash($password, PASSWORD_DEFAULT),
-                    'anh_dai_dien' => $uploadFile ?? null
+                    'password' => password_hash($password, PASSWORD_DEFAULT) ?? $user['password'],
+                    'anh_dai_dien' => $uploadFile ?? $user['anh_dai_dien']
                 ];
 
 
 
-                if ($this->userModel->addUser($data)) {
-                    $_SESSION['success'] = "Cập nhậtr người dùng thành công!";
+                if ($this->userModel->updateUser($data, $id)) {
+                    $_SESSION['success'] = "Cập nhật người dùng thành công!";
                     header("Location: /devC/Php/user-manager/");
                 } else {
-                    $errors['insert'] = "Lỗi khi cập nhật người dùng! Kiểm tra lại";
+                    $errors['error'] = "Lỗi khi cập nhật người dùng! Kiểm tra lại";
                     return view('user/update', ['errors' => $errors]);
                 }
             } else {
-                return view('user/update', ['errors' => $errors]);
+
+                // Nếu có lỗi thì hiển thị lại form cập nhật với thông báo lỗi
+                // và dữ liệu đã nhập trước đó
+                $user = $this->userModel->getUserBy("id = $id");
+                return view('user/update', ['errors' => $errors, 'user' => $user, 'id' => $id]);
             }
+        }
+    }
+
+    public function deleteUser($id)
+    {
+
+        $user = $this->userModel->getUserBy("id = $id");
+
+        if (empty($user)) {
+            return false;
+        }
+
+        if ($this->userModel->deleteUser($id)) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

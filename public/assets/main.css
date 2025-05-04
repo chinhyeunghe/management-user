@@ -251,6 +251,12 @@
   font-size: 13px;
 }
 
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
 .container .wp-site .main-content table td {
   color: #555;
   font-size: 14px;

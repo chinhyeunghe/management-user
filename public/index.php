@@ -47,6 +47,13 @@ foreach ($routes as $routePattern => $target) {
             exit;
         }
 
+        // Kiểm tra login chưa
+
+        if (!isset($_SESSION['auth']) && $requestUri != 'devC/Php/user-manager/auth') {
+            header("Location: /devC/Php/user-manager/auth");
+        }
+        // Kiểm tra quyền truy cập        
+
         // Gọi hàm + truyền tham số
         call_user_func_array([$controller, $method], $matches);
         $routeFound = true;

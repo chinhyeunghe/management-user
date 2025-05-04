@@ -5,10 +5,10 @@ require_once '../public/template/sidebar.php';
 ?>
 <h2 class="line-bottom">Update user system</h2>
 <div class="form-main">
-    <form action="/devC/Php/user-manager/add" enctype="multipart/form-data" method="POST">
+    <form action="/devC/Php/user-manager/edit/<?= $id ?>" enctype="multipart/form-data" method="POST">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" placeholder="Enter your name">
+            <input type="text" name="name" id="name" value="<?= $user['name'] ?>" placeholder="Enter your name">
             <span class="error-input">
                 <?php
                 if (isset($errors['name'])) {
@@ -19,7 +19,7 @@ require_once '../public/template/sidebar.php';
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="Enter your email">
+            <input type="email" name="email" id="email" value="<?= $user['email'] ?>" placeholder="Enter your email">
             <span class="error-input">
                 <?php
                 if (isset($errors['email'])) {
@@ -30,7 +30,7 @@ require_once '../public/template/sidebar.php';
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="Enter your password">
+            <input type="password" name="password" id="password" value="" placeholder="Enter your password">
             <span class="error-input">
                 <?php
                 if (isset($errors['password'])) {
@@ -42,6 +42,9 @@ require_once '../public/template/sidebar.php';
         <div class="form-group">
             <label for="avatar">Avatar</label>
             <input type="file" name="avatar" id="avatar" accept=".jpg, .jpeg, .png, .gif">
+            <div class="avatar_show" style="text-align: center;">
+                <img src="/devC/Php/user-manager<?= $user['anh_dai_dien'] ?>" alt="Avatar" class="avatar" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
+            </div>
             <span class="error-input">
                 <?php
                 if (isset($errors['avatar'])) {
@@ -52,15 +55,15 @@ require_once '../public/template/sidebar.php';
         </div>
 
         <span class="error-input">
-                
-                <?php
-                if (isset($errors['insert'])) {
-                    echo $errors['insert'];
-                }
-                ?>
-            </span>
 
-        <button type="submit">Create User</button>
+            <?php
+            if (isset($errors['insert'])) {
+                echo $errors['insert'];
+            }
+            ?>
+        </span>
+
+        <button type="submit">Update User</button>
 
     </form>
 </div>
